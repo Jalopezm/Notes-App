@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100%;
+  height: 79vh;
+  background-image: url("/src/assets/img/corcho.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+nav {
+  z-index: 90;
+  position: relative;
+  display: flex;
+  background-color: #d9d9d9;
+  height: 100vh;
+  width: 15%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: space-between;
+}
+.menu {
+  position: fixed;
+  transform: translateX(-100%);
+  transition: transform 0.2s;
+  top: 0;
+  left: 0;
+  right: 80%;
+  bottom: 0;
+  z-index: 99;
+  padding-right: 5%;
+  background: #d9d9d9;
+  padding-top: 8rem;
+}
+nav ul li a {
+  list-style: none;
+}
+.closeIcon{
+  display: none;
+}
+.showMenu {
+  transform: translateX(0);
+}
+.hamburger {
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  display: block;
+  top: 3%;
+  left: 3%;
+  position: fixed;
+  z-index: 100;
+  width: 90px;
+  height: 90px;
+  border: none;
+  cursor: pointer;
+}
+.material-icons {
+  font-size: 40px !important;
+}
+.menuItem {
+  display: block;
+  margin: 2rem 4rem;
+  font-size: 1.8rem;
+  text-decoration: none;
+}
+.menuItem:hover,
+.menuItem:focus {
+  background-color: aqua;
+  width: 100%;
+  padding: 5%;
+  text-decoration: none;
+  color: white;
+}
+
+.postIt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+.postItImg {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 50vmin;
+  height: 50vmin;
+}
+.title {
+  margin: auto;
+  z-index: 90;
+  position: absolute;
+  font-size: 2.5vmax;
+  color: #000000;
+  transform: rotate(-13.08deg);
+  align-items: center;
+  justify-content: center;
+}
+.vertical-border-left {
+  position: absolute;
+  width: 1%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+
+  background: #dec29c;
+}
+.vertical-border-right {
+  position: absolute;
+  width: 1%;
+  height: 100%;
+  right: 0px;
+  top: 0px;
+
+  background: #dec29c;
+}
+.horizontal-border-top {
+  position: absolute;
+  width: 100%;
+  height: 2%;
+  left: 0px;
+  top: 0px;
+
+  background: #dec29c;
+}
+.horizontal-border-bottom {
+  position: absolute;
+  width: 100%;
+  height: 2%;
+  left: 0px;
+  bottom: 0px;
+
+  background: #dec29c;
+}
