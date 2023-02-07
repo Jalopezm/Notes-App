@@ -1,4 +1,4 @@
-import NewNote from "../NewNote";
+import NewNote from "../assets/js/NewNote";
 import { useState } from "react";
 
 

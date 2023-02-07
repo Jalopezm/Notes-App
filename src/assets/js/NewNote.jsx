@@ -1,23 +1,30 @@
 export default function NewNote({ noteType }) {
   if (noteType === "text") {
     return (
-      <div>
+      <>
         <h1>New Text Note</h1>
+        <div className="text-form">
         <form action="/textNote" method="post">
           <label htmlFor="note-title">Title</label>
+          <br />
           <input type="text" name="note-tilte" id="note-title" />
+          <br />
           <label htmlFor="text-note">Note Cotent</label>
+          <br />
           <textarea
             name="text-note"
             id="text-note"
             cols="30"
             rows="10"
           ></textarea>
+          <br />
           <label htmlFor="img">Add an Image</label>
-          <input type="file" name="img" id="img" />
+          <input type="file" name="img" id="img" accept="image/*"/>
+          <br />
           <input type="submit" value="Send" />
         </form>
-      </div>
+        </div>
+      </>
     );
   } else {
     return (
