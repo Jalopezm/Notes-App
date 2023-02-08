@@ -1,9 +1,17 @@
 import NewNote from "../assets/js/NewNote";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 
 export default function Notes() {
     const [noteType, setNoteType] = useState("text");
+
+    useEffect(()=>{
+        document.body.classList.add("note");
+        return () => {
+            document.body.classList.remove("note");
+        }
+    },[]);
+    
     return (
         <div>
             <h1>Notes App</h1>

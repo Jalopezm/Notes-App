@@ -4,13 +4,16 @@
 }
 body {
   width: 100%;
-  height: 70vh;
+  height: 100vh;
   background-image: url("/src/assets/img/corcho.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
-
+body.note{
+  background-color: yellow;
+  background-image: none;
+}
 nav {
   z-index: 90;
   position: relative;
@@ -25,19 +28,17 @@ nav {
   align-content: space-between;
 }
 .menu {
+  width: auto;
+  padding-top:calc(20% - 120px);
   position: fixed;
-  transform: translateX(-100%);
+  transform: translateX(-200%);
   transition: transform 0.2s;
   top: 0;
   left: 0;
-  right: 80%;
-  bottom: 0;
   z-index: 99;
-  padding-right: 5%;
-  background: #d9d9d9;
-  padding-top: 8rem;
+  background-color: #d9d9d9;
 }
-nav ul li a {
+nav ul li{
   list-style: none;
 }
 .closeIcon{
@@ -62,15 +63,17 @@ nav ul li a {
 .material-icons {
   font-size: 40px !important;
 }
-.menuItem {
+.menuItem a{
+  text-decoration: none;
+}
+.menuItem{
   display: block;
   margin: 2rem 4rem;
   font-size: 1.8rem;
-  text-decoration: none;
 }
 .menuItem:hover,
 .menuItem:focus {
-  background-color: aqua;
+  background-color: yellowgreen;
   width: 100%;
   padding: 5%;
   text-decoration: none;
@@ -81,7 +84,7 @@ nav ul li a {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  padding-top: 10%;
 }
 .postItImg {
   position: relative;
