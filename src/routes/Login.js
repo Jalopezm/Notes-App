@@ -2,6 +2,12 @@ export default function Login() {
   return (
     <div>
       <h1 className="login">Login</h1>
+      <div className='border'>
+        <span className="vertical-border-right"></span>
+        <span className="vertical-border-left"></span>
+        <span className="horizontal-border-top"></span>
+        <span className="horizontal-border-bottom"></span>
+      </div>
       <form action="/login" method="post" className="login-form">
         <div id="chincheta">
           <svg>

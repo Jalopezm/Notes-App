@@ -2,6 +2,12 @@ export default function SignUp() {
     return (
       <div>
         <h1 className="signup">SignUp</h1>
+        <div className='border'>
+        <span className="vertical-border-right"></span>
+        <span className="vertical-border-left"></span>
+        <span className="horizontal-border-top"></span>
+        <span className="horizontal-border-bottom"></span>
+      </div>
         <form action="/signup" method="post" className="signup-form"> 
         <div id="chincheta">
           <svg>

@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import { Link, Outlet } from "react-router-dom";
-import ToggleMenu from "../assets/js/toggleMenu";
+import ToggleMenu from "../components/toggleMenu";
 
 export default function Root() {
   const [menu, setMenu] = useState(null);

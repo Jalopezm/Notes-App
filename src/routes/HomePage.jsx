@@ -10,7 +10,6 @@ export default function Homepage() {
         <span className="horizontal-border-bottom"></span>
       </div>
       <div className='postIt'>
-      <h1 className='title'>Notes App</h1>
       <img src={img} alt="PostIt" className='postItImg'/>
       </div>
 
