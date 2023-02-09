@@ -1,3 +1,5 @@
+import NewAudioNote from './getAudio.jsx'
+
 export default function NewNote({ noteType }) {
   if (noteType === "text") {
     return (
@@ -25,12 +27,13 @@ export default function NewNote({ noteType }) {
       <div>
         <h1 className="note-title">New Audio Note</h1>
         <div className="text-form">
-          <form action="/audioNote" method="post">
+          <form action="/note" method="post">
             <label htmlFor="note-title">Title</label>
             <input type="text" name="note-tilte" id="note-title" />
-            <p>audio</p>
+            <section className="sound-clips"></section>
             <input type="submit" value="Send" />
           </form>
+          <NewAudioNote/>
         </div>
       </div>
     );
