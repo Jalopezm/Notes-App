@@ -14,11 +14,8 @@ export default function NewNote({ noteType }) {
           <textarea
             name="text-note"
             id="text-note"
-            cols="30"
-            rows="10"
           ></textarea>
           <br />
-          <label htmlFor="img">Add an Image</label>
           <input type="file" name="img" id="img" accept="image/*"/>
           <br />
           <input type="submit" value="Send" />
