@@ -216,7 +216,7 @@ textarea {
 
 .login-form input[type="submit"],
 .signup-form input[type="submit"],
-.text-form input[type="submit"] {
+.text-form input[type="submit"] ,.audio-button{
   margin-top: 10px;
   padding: 10px 20px;
   background-color: #ffb900;
@@ -229,7 +229,7 @@ textarea {
 }
 .login-form input[type="submit"]:hover,
 .signup-form input[type="submit"]:hover,
-.text-form input[type="submit"]:hover {
+.text-form input[type="submit"]:hover{
   background-color: #ffca28;
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -277,4 +277,8 @@ border: none;
 background-color: #d9d9d9 ;
 border-radius: 15px;
 outline: none;
+}
+
+.audio-button{
+  margin: 10px;
 }
