@@ -106,6 +106,7 @@ export default function NewAudioNote() {
   return (
     <>
       <section className="main-controls">
+      <section className="sound-clips"></section>
         <div id="buttons">
           <button className="record audio-button">Record</button>
           <button className="stop audio-button">Stop</button>

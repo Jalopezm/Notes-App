@@ -30,7 +30,6 @@ export default function NewNote({ noteType }) {
           <form action="/note" method="post">
             <label htmlFor="note-title">Title</label>
             <input type="text" name="note-tilte" id="note-title" />
-            <section className="sound-clips"></section>
             <input type="submit" value="Send" />
           </form>
           <NewAudioNote/>
