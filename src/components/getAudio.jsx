@@ -1,117 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 export default function NewAudioNote() {
-  const [record, setRecord] = useState(null);
-  const [stop, setStop] = useState(null);
-  const [soundClips, setSoundClips] = useState(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const [blob, setBlob] = useState(null);
+  const mediaRecorderRef = useRef(new MediaRecorder(new MediaStream()));
 
-  useEffect(() => {
-    setRecord(document.querySelector(".record"));
-    setStop(document.querySelector(".stop"));
-    setSoundClips(document.querySelector(".sound-clips"));
-  }, []);
+  const startRecording = () => {
+    let chunks = [];
+   setBlob(null)
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      mediaRecorderRef.current.start();
 
-  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices
-      .getUserMedia(
-        // constraints - only audio needed for this app
-        {
-          audio: true,
-        }
-      )
-      // Success callback
-      .then((stream) => {
-        let chunks = [];
-
-        const mediaRecorder = new MediaRecorder(stream);
-
-        record.onclick = function () {
-          mediaRecorder.start();
-          record.style.background = "red";
-
-          stop.disabled = false;
-          record.disabled = true;
-        };
-
-        stop.onclick = function () {
-          mediaRecorder.stop();
-          record.style.background = "";
-          record.style.color = "";
-
-          stop.disabled = true;
-          record.disabled = false;
-        };
-
-        mediaRecorder.onstop = function (e) {
-          const clipName = prompt(
-            "Enter a name for your sound clip?",
-            document.querySelector("#note-title").value
-          );
-          if (clipName !== null) {
-            const clipContainer = document.createElement("article");
-            const clipLabel = document.createElement("p");
-            const audio = document.createElement("audio");
-            const deleteButton = document.createElement("button");
-
-            clipContainer.classList.add("clip");
-            audio.setAttribute("controls", "");
-            deleteButton.textContent = "Delete";
-            deleteButton.className = "delete audio-button";
-
-            if (clipName === null) {
-              clipLabel.textContent = "My First Audio";
-            } else {
-              clipLabel.textContent = clipName;
-            }
-
-            clipContainer.appendChild(audio);
-            clipContainer.appendChild(clipLabel);
-            clipContainer.appendChild(deleteButton);
-            soundClips.appendChild(clipContainer);
-
-            audio.controls = true;
-            const blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
-            chunks = [];
-            const audioURL = window.URL.createObjectURL(blob);
-            audio.src = audioURL;
-
-            deleteButton.onclick = function (e) {
-              e.target.closest(".clip").remove();
-            };
-
-            clipLabel.onclick = function () {
-              const existingName = clipLabel.textContent;
-              const newClipName = prompt(
-                "Enter a new name for your sound clip?"
-              );
-              if (newClipName === null) {
-                clipLabel.textContent = existingName;
-              } else {
-                clipLabel.textContent = newClipName;
-              }
-            };
-          }
-
-          mediaRecorder.ondataavailable = function (e) {
-            chunks.push(e.data);
-          };
-        };
-      })
-      .catch((err) => {
-        console.error(`The following getUserMedia error occurred: ${err}`);
+      
+      mediaRecorderRef.current.addEventListener("dataavailable", (event) => {
+        chunks.push(event.data);
       });
-  } else {
-    console.log("getUserMedia not supported on your browser!");
-  }
+      mediaRecorderRef.current.addEventListener("stop", () => {
+        setBlob(new Blob(chunks, { type: "audio/wav" }));
+        chunks = [];
+      });
+
+      setIsRecording(true);
+    });
+  };
+
+  const stopRecording = () => {
+    mediaRecorderRef.current.stop();
+    setIsRecording(false);
+  };
+
   return (
     <>
-      <section className="main-controls">
-      <section className="sound-clips"></section>
-        <div id="buttons">
-          <button className="record audio-button">Record</button>
-          <button className="stop audio-button">Stop</button>
-        </div>
-      </section>
+      <button onClick={isRecording ? stopRecording : startRecording}>
+        {isRecording ? "Stop recording" : "Start recording"}
+      </button>
+      {blob ? <audio className="audio" controls src={URL.createObjectURL(blob)} /> : null}
     </>
   );
 }
