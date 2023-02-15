@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class NameForm extends React.Component {
+export default class postSignUp extends React.Component {
     constructor() {
         super();
         this.state = { };
