@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Outlet } from "react-router-dom";
 import ToggleMenu from "../components/toggleMenu";
 
@@ -6,18 +6,19 @@ export default function Root() {
   const [menu, setMenu] = useState(null);
   const [closeIcon, setCloseIcon] = useState(null);
   const [menuIcon, setMenuIcon] = useState(null);
-  useEffect(()=>{
+  useEffect(() => {
     setMenu(document.querySelector(".menu"));
     setCloseIcon(document.querySelector(".closeIcon"));
     setMenuIcon(document.querySelector(".menuIcon"));
-  },[]);
-  function hideNav(){
+  }, []);
+  function hideNav() {
     if (menu.classList.contains("showMenu")) {
       menu.classList.remove("showMenu");
       closeIcon.style.display = "none";
       menuIcon.style.display = "block";
     }
   }
+
   return (
     <>
       <ToggleMenu />

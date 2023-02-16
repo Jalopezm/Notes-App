@@ -3,14 +3,12 @@ import { useState, useEffect } from "react";
 
 export default function Notes() {
   const [noteType, setNoteType] = useState("text");
-
   useEffect(() => {
     document.body.classList.add("note");
     return () => {
       document.body.classList.remove("note");
     };
   }, []);
-
   return (
     <>
       <div className="note-select">
