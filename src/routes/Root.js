@@ -36,6 +36,9 @@ export default function Root() {
           <li className="menuItem">
             <Link to="/notes" onClick={hideNav}>Notes</Link>
           </li>
+          <li className="menuItem">
+            <Link to="/user" onClick={hideNav}>User</Link>
+          </li>
         </ul>
       </nav>
       <Outlet />

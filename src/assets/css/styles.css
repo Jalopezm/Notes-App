@@ -166,7 +166,23 @@ nav ul li {
   flex-wrap: wrap;
   right: 10%;
 }
-.text-form label {
+.file-form {
+  width: 300px;
+  height: 200px;
+  padding: 20px;
+  padding-bottom: 10%;
+  background: #fefb9a;
+  position: relative;
+  display: flex;
+  font-family: Arial, sans-serif;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: space-between;
+  flex-wrap: wrap;
+  right: 0;
+}
+.text-form label ,.file-form label{
   font-weight: bold;
   display: block;
   margin-bottom: 10px;
@@ -216,7 +232,8 @@ textarea {
 
 .login-form input[type="submit"],
 .signup-form input[type="submit"],
-.text-form input[type="submit"] ,.audio-button{
+.text-form input[type="submit"],
+.audio-button {
   margin-top: 10px;
   padding: 10px 20px;
   background-color: #ffb900;
@@ -229,7 +246,7 @@ textarea {
 }
 .login-form input[type="submit"]:hover,
 .signup-form input[type="submit"]:hover,
-.text-form input[type="submit"]:hover{
+.text-form input[type="submit"]:hover {
   background-color: #ffca28;
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -245,40 +262,73 @@ svg {
   height: 53px;
 }
 .login,
-.signup{
+.signup {
   text-align: center;
   padding-top: 5%;
   font-size: 5rem;
 }
-.note-title{
+.note-title {
   text-align: center;
   padding-top: 2%;
   font-size: 3rem;
 }
-.note-select{
+.note-select {
   position: absolute;
   display: flex;
   flex-direction: column;
   margin-top: 20%;
-  left:15%;
+  left: 15%;
 }
-.note-select label{
+.note-select label {
   font-weight: bold;
   display: block;
   margin-bottom: 10px;
-  font-size:2em; 
+  font-size: 2em;
 }
 
-#note-type{
-padding: 5%;
-font-size: 1.5rem;
-margin:auto;
-border: none;
-background-color: #d9d9d9 ;
-border-radius: 15px;
-outline: none;
+#note-type {
+  padding: 5%;
+  font-size: 1.5rem;
+  margin: auto;
+  border: none;
+  background-color: #d9d9d9;
+  border-radius: 15px;
+  outline: none;
 }
 
-.audio-button{
+.audio-button {
   margin: 10px;
+}
+.NotesList {
+  background-color: #9ba3eb;
+}
+
+.notes_table {
+  width: 100%;
+  border: 1px solid #242f9b;
+  background-color: #dbdffd;
+}
+
+.table_header {
+  background-color: #fefb9a;
+  color: black;
+  padding: 0.5em 1em;
+}
+
+.table_data {
+  text-align: center;
+  background-color: white;
+}
+
+.table_delete {
+  display: flex;
+  height: max-content;
+  justify-content: center;
+}
+
+.note-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 5%;
 }

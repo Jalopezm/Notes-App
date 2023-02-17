@@ -20,7 +20,9 @@ export default function PostLogin() {
             .then((response) => response.json())
             .then((data) => {
                 localStorage.setItem("jwt", data.token);
-                console.log(localStorage.getItem("jwt"))
+                localStorage.setItem("jwtExp",data.expiration)
+                
+                console.log(data)
                 return navigate("/notes");
             })
     }

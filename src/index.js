@@ -9,6 +9,7 @@ import Login from './routes/Login'
 import SignUp from './routes/SignUp';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from  'react-router-dom';
+import UserInfo from './routes/UserInfo';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />
+      },
+      {
+        path: "/user",
+        element: <UserInfo />
       },
       
     ]

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-export default function NewAudioNote() {
+export default function NewAudioNote({ onLoaded }) {
   const [isRecording, setIsRecording] = useState(false);
   const [blob, setBlob] = useState(null);
   const mediaRecorderRef = useRef(new MediaRecorder(new MediaStream()));
@@ -17,7 +17,9 @@ export default function NewAudioNote() {
         chunks.push(event.data);
       });
       mediaRecorderRef.current.addEventListener("stop", () => {
-        setBlob(new Blob(chunks, { type: "audio/wav" }));
+        const blob = new Blob(chunks, { type: "audio/wav" });
+        setBlob(blob);
+        onLoaded(blob);
         chunks = [];
       });
 
