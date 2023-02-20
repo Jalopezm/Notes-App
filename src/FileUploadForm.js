@@ -2,19 +2,6 @@ import React, { useState } from "react";
 
 const baseUrl = "http://localhost:8081";
 
-const uploadFile = async (noteId, file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    const response = await fetch(`${baseUrl}/notes/${noteId}/files`, {
-        method: "POST",
-        body: formData,
-        headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        }
-    });
-    return await response.json();
-};
-
 export default function FileUploadForm({ noteId }) {
     const [file, setFile] = useState(null);
 
@@ -43,3 +30,15 @@ export default function FileUploadForm({ noteId }) {
         </>
     );
 }
+const uploadFile = async (noteId, file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await fetch(`${baseUrl}/notes/${noteId}/files`, {
+        method: "POST",
+        body: formData,
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+        }
+    });
+    return await response.json();
+};

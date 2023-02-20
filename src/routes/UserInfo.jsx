@@ -28,7 +28,7 @@ export default function UserInfo() {
   return (
     <>
       <button onClick={logout}>LogOut</button>
-      <div className="note-table">
+      <div className="note-table" >
         <ListNotes />
       </div>
     </>

@@ -9,13 +9,12 @@ export default function NewNote({ noteType }) {
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
   const [blob, setBlob] = useState(null);
-  const [noteId, setNoteId] = useState(0);
-  const [notes, setNotes] = useState([]);
-  // const [file, setFile] = useState("");
+  const [noteId, setNoteId] = useState();
+
   const [isPublic, setIsPublic] = useState(false);
 
   useEffect(() => {
-    const id = setInterval(() => {
+    const jwt = setInterval(() => {
       const token = localStorage.getItem("jwt");
       const tokenExp = localStorage.getItem("jwtExp");
       if (!token || token === "" || new Date(tokenExp) <= new Date()) {
@@ -26,14 +25,9 @@ export default function NewNote({ noteType }) {
       }
     }, 1000);
     return () => {
-      clearInterval(id);
+      clearInterval(jwt);
     };
   }, [navigate]);
-
-  // function fileToBlob(file) {
-  //   const blob = URL.createObjectURL(file);
-  //   console.log(blob);
-  // }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -47,18 +41,19 @@ export default function NewNote({ noteType }) {
     await fetch("http://localhost:8081/notes", {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + token,
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-    .then((response) => {
-      return response.json();
-    }).then((data) => {
-      setNoteId(data.id)
-      console.log("Success:", data);
-      
-    });
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.id);
+        console.log("Success:", data);
+        setNoteId(data.id);
+      });
   };
 
   if (noteType === "text") {
@@ -88,7 +83,7 @@ export default function NewNote({ noteType }) {
             <br />
             <input type="submit" value="Send" />
           </form>
-          <FileUploadForm noteid = {noteId} />
+          {noteId && <FileUploadForm noteId={noteId} />}
         </div>
       </>
     );
