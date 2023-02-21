@@ -5,11 +5,11 @@ import NewAudioNote from "./getAudio.jsx";
 
 export default function NewNote({ noteType }) {
   let navigate = useNavigate();
-  const token = localStorage.getItem("jwt");
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
   const [blob, setBlob] = useState(null);
   const [noteId, setNoteId] = useState();
+  let checkbox=document.getElementById("public")
 
   const [isPublic, setIsPublic] = useState(false);
 
@@ -17,6 +17,7 @@ export default function NewNote({ noteType }) {
     const jwt = setInterval(() => {
       const token = localStorage.getItem("jwt");
       const tokenExp = localStorage.getItem("jwtExp");
+      setIsPublic(checkbox.checked);
       if (!token || token === "" || new Date(tokenExp) <= new Date()) {
         localStorage.setItem("jwtExp", "");
         localStorage.setItem("jwt", "");
@@ -27,9 +28,10 @@ export default function NewNote({ noteType }) {
     return () => {
       clearInterval(jwt);
     };
-  }, [navigate]);
+  }, [navigate,checkbox]);
 
   const handleSubmit = async (event) => {
+    console.log(isPublic);
     event.preventDefault();
     const data = {
       title: title,
@@ -81,6 +83,7 @@ export default function NewNote({ noteType }) {
               required
             ></textarea>
             <br />
+            <input type="checkbox" name="isPublic" id="public" />Is Public
             <input type="submit" value="Send" />
           </form>
           {noteId && <FileUploadForm noteId={noteId} />}
@@ -101,6 +104,7 @@ export default function NewNote({ noteType }) {
               onChange={(event) => setTitle(event.target.value)}
               required
             />
+            <input type="checkbox" name="isPublic" id="public" />Is Public
             <input type="submit" value="Send" />
           </form>
           <NewAudioNote onLoaded={(audio) => setBlob(audio)} />

@@ -10,6 +10,7 @@ import SignUp from './routes/SignUp';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from  'react-router-dom';
 import UserInfo from './routes/UserInfo';
+import ViewNote from './routes/ViewNote';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <UserInfo />
+      },
+      {
+        path: "/note/:id",
+        element: <ViewNote />
       },
       
     ]
