@@ -5,8 +5,10 @@ import { useParams } from "react-router-dom";
 export default function ViewNote() {
   const token = localStorage.getItem("jwt");
   const [src, setSrc] = useState("");
+  const [type, setType] = useState("");
+
   const { id } = useParams();
-  const [notes, setNotes] = useState([]);
+  const [note, setNote] = useState({});
 
   useEffect(()=>{
     getNote()
@@ -25,7 +27,7 @@ export default function ViewNote() {
       })
       .then((data) => {
         console.log(data);
-        setNotes(data);
+        setNote(data);
         getFile();
       });
   }
@@ -42,6 +44,7 @@ export default function ViewNote() {
       })
       .then((data) => {
         getImg(data[0].uri);
+        console.log(data[0].uri)
       });
   }
   async function getImg(uri) {
@@ -57,18 +60,101 @@ export default function ViewNote() {
       })
       .then((data) => {
         console.log(data);
+        setType(data.type);
         setSrc(URL.createObjectURL(data));
       });
   }
+  async function updateNote() {
+    const data = {
+      title: note.title,
+      body: note.body,
+      isPublic: note.isPublic,
+      isVoiceNote: note.isVoiceNote,
+    };
+    await fetch(`http://localhost:8081/notes/${note.id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      });
+  }
+  if(!note.isVoiceNote){
   return (
     <>
         <div className="note-body">
-          <h1>{notes.title}</h1>
-          <p>{notes.body}</p>
+        <form onSubmit={updateNote}>
+            <label htmlFor="note-title">Title</label>
+            <br />
+            <input
+              type="text"
+              name="note-tilte"
+              id="note-title"
+              value={note.title}
+              onChange={(event) => setNote({ ...note, title: event.target.value })}
+              required
+            />
+            <br />
+            <label htmlFor="text-note">Note Cotent</label>
+            <br />
+            <textarea
+              name="text-note"
+              id="text-note"
+              value={note.body}
+              onChange={(event) => setNote({ ...note, body: event.target.value })}
+              required
+            ></textarea>
+            <br />
+            <br />
+            <input type="submit" value="Send" />
+          </form>
         </div>
         <div className="img">
           <img alt="img" src={`${src}`} ></img>
         </div>
     </>
   );
+  }else{
+    return(
+      <>
+      <div className="note-body">
+      <form onSubmit={updateNote}>
+            <label htmlFor="note-title">Title</label>
+            <br />
+            <input
+              type="text"
+              name="note-tilte"
+              id="note-title"
+              value={note.title}
+              onChange={(event) => setNote({ ...note, title: event.target.value })}
+              required
+            />
+            <br />
+            <label htmlFor="text-note">Note Cotent</label>
+            <br />
+            <textarea
+              name="text-note"
+              id="text-note"
+              value={note.body}
+              onChange={(event) => setNote({ ...note, body: event.target.value })}
+              required
+            ></textarea>
+            <br />
+            <br />
+            <input type="submit" value="Send" />
+          </form>
+        </div>
+        <div className="img">
+          <audio src={`${src}`}></audio>
+        </div>
+      </>
+    )
+  }
 }

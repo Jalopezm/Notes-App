@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <UserInfo />
       },
       {
-        path: "/note/:id",
+        path: "/notes/:id",
         element: <ViewNote />
       },
       

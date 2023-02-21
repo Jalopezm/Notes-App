@@ -7,9 +7,8 @@ export default function NewNote({ noteType }) {
   let navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
-  const [blob, setBlob] = useState(null);
-  const [noteId, setNoteId] = useState();
-  let checkbox=document.getElementById("public")
+  const [noteId, setNoteId] = useState(note.id);
+  let checkbox = document.getElementById("public");
 
   const [isPublic, setIsPublic] = useState(false);
 
@@ -28,7 +27,7 @@ export default function NewNote({ noteType }) {
     return () => {
       clearInterval(jwt);
     };
-  }, [navigate,checkbox]);
+  }, [navigate, checkbox]);
 
   const handleSubmit = async (event) => {
     console.log(isPublic);
@@ -57,6 +56,17 @@ export default function NewNote({ noteType }) {
         setNoteId(data.id);
       });
   };
+  function audioUpload(noteId, blob ) {
+    const formData = new FormData();
+    formData.append("audio", blob);
+    fetch(`http://localhost:8081/notes/${noteId}/files`, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    });
+  }
 
   if (noteType === "text") {
     return (
@@ -83,7 +93,10 @@ export default function NewNote({ noteType }) {
               required
             ></textarea>
             <br />
-            <input type="checkbox" name="isPublic" id="public" />Is Public
+            <br />
+            <input type="checkbox" name="isPublic" id="public" />
+            Is Public
+            <br />
             <input type="submit" value="Send" />
           </form>
           {noteId && <FileUploadForm noteId={noteId} />}
@@ -95,7 +108,7 @@ export default function NewNote({ noteType }) {
       <>
         <h1 className="note-title">New Audio Note</h1>
         <div className="text-form">
-          <form action="/note" method="post">
+          <form onSubmit={handleSubmit}>
             <label htmlFor="note-title">Title</label>
             <input
               type="text"
@@ -104,10 +117,18 @@ export default function NewNote({ noteType }) {
               onChange={(event) => setTitle(event.target.value)}
               required
             />
-            <input type="checkbox" name="isPublic" id="public" />Is Public
+            <input type="checkbox" name="isPublic" id="public" />
+            Is Public
+            <br />
             <input type="submit" value="Send" />
           </form>
-          <NewAudioNote onLoaded={(audio) => setBlob(audio)} />
+          {noteId && (
+            <NewAudioNote
+              onLoaded={(audio) => {
+                audioUpload(noteId, audio);
+              }}
+            />
+          )}
         </div>
       </>
     );
