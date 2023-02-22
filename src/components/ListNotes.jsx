@@ -78,7 +78,7 @@ export default function ListNotes() {
                 <button onClick={(e) => deleteNote(note.id)}>Delete</button>
               </td>
               <td className="table_update">
-                <button onClick={(e) => navigate("/notes/" + note.id)}>
+                <button onClick={(e) => navigate("/notes/" + note.id+"/edit")}>
                   Update
                 </button>
               </td>

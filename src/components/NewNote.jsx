@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FileUploadForm from "../FileUploadForm.js";
-import NewAudioNote from "./getAudio.jsx";
+import NewAudioNote from "./NewAudioNote.jsx";
 
 export default function NewNote({ noteType }) {
   let navigate = useNavigate();
@@ -58,7 +58,7 @@ export default function NewNote({ noteType }) {
   };
   function audioUpload(noteId, blob ) {
     const formData = new FormData();
-    formData.append("audio", blob);
+    formData.append("file", blob);
     fetch(`http://localhost:8081/notes/${noteId}/files`, {
       method: "POST",
       body: formData,

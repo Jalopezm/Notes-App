@@ -11,6 +11,7 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from  'react-router-dom';
 import UserInfo from './routes/UserInfo';
 import ViewNote from './routes/ViewNote';
+import EditNote from './routes/EditNote';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/notes/:id",
         element: <ViewNote />
+      },
+      {
+        path: "/notes/:id/edit",
+        element: <EditNote />
       },
       
     ]
