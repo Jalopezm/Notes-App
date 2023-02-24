@@ -56,8 +56,8 @@ export default function ListNotes() {
   }, [token, findBody, findTitle, findType, sortBy]);
 
   const formatTime = (data) => {
-    data.createdAt = new Date(data.createdAt).getTime()
-    data.modifiedAt = new Date(data.modifiedAt).getTime()
+    data.createdAt = new Date(data.createdAt).getTime();
+    data.modifiedAt = new Date(data.modifiedAt).getTime();
   };
 
   const sortNotesBy = (data, key) => {
@@ -93,42 +93,44 @@ export default function ListNotes() {
 
   return (
     <>
-      <label htmlFor="sortBy">Sort by: </label>
-      <select
-        name="sortBy"
-        id="select_sortBy"
-        onChange={(e) => setSortBy(e.target.value)}
-      >
-        <option value="">Sort By</option>
-        <option value="title">Title</option>
-        <option value="createdAt">Creation Date</option>
-        <option value="modifiedAt">Last Update</option>
-      </select>
+      <div>
+        <label htmlFor="sortBy">Sort by: </label>
+        <select
+          name="sortBy"
+          id="select_sortBy"
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="">Sort By</option>
+          <option value="title">Title</option>
+          <option value="createdAt">Creation Date</option>
+          <option value="modifiedAt">Last Update</option>
+        </select>
 
-      <label htmlFor="findType">Find By Type:</label>
-      <select
-        name="findType"
-        id="select_type"
-        onChange={(e) => setFindType(e.target.value)}
-      >
-        <option value="">Find By Type</option>
-        <option value="Text">Text</option>
-        <option value="Audio">Audio</option>
-      </select>
+        <label htmlFor="findType">Find By Type:</label>
+        <select
+          name="findType"
+          id="select_type"
+          onChange={(e) => setFindType(e.target.value)}
+        >
+          <option value="">Find By Type</option>
+          <option value="Text">Text</option>
+          <option value="Audio">Audio</option>
+        </select>
 
-      <label htmlFor="findTitle">Find By Title:</label>
-      <input
-        type="text"
-        name="findTitle"
-        onChange={(e) => setFindTitle(e.target.value)}
-      />
+        <label htmlFor="findTitle">Find By Title:</label>
+        <input
+          type="text"
+          name="findTitle"
+          onChange={(e) => setFindTitle(e.target.value)}
+        />
 
-      <label htmlFor="findBody">Find By Content:</label>
-      <input
-        type="text"
-        name="findBody"
-        onChange={(e) => setFindBody(e.target.value)}
-      />
+        <label htmlFor="findBody">Find By Content:</label>
+        <input
+          type="text"
+          name="findBody"
+          onChange={(e) => setFindBody(e.target.value)}
+        />
+      </div>
       <table className="note_table">
         <thead>
           <tr>

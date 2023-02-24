@@ -25,9 +25,13 @@ export default function UserInfo() {
     localStorage.setItem("jwtExp", "");
     return navigate("/");
   }
+  function changePassword() {
+    return navigate("/changepassword");
+  }
   return (
     <>
       <button onClick={logout}>LogOut</button>
+      <button onClick={changePassword}>Change Password</button>
       <div className="note-table" >
         <ListNotes />
       </div>

@@ -12,6 +12,7 @@ import {createBrowserRouter, RouterProvider} from  'react-router-dom';
 import UserInfo from './routes/UserInfo';
 import ViewNote from './routes/ViewNote';
 import EditNote from './routes/EditNote';
+import UserUpdate from './routes/UpdateUser';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <UserInfo />
+      },
+      {
+        path: "/changepassword",
+        element: <UserUpdate />
       },
       {
         path: "/notes/:id",
