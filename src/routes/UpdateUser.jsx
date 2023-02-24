@@ -8,23 +8,20 @@ export default function UserUpdate(){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = { oldPassword, newPassword };
+        const data = { oldPassword:oldPassword, newPassword:newPassword };
 
-        await fetch("http://localhost:8081/login", {
+        await fetch("http://localhost:8081/changepassword", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("jwt"),
             },
             body: JSON.stringify(data),
         })
             .then((response) => response.json())
-            .then((data) => {
-                localStorage.setItem("jwt", data.token);
-                localStorage.setItem("jwtExp",data.expiration)
-                
-                console.log(data)
+            .then(() => {
                 return navigate("/notes");
-            })
+            });
     }
     return(
         <>
