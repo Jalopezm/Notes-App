@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 export default function ViewNote() {
   const token = localStorage.getItem("jwt");
   const [src, setSrc] = useState("");
+  const [isLoading,setIsLoading] = useState(false);
 
   const { id } = useParams();
   const [note, setNote] = useState({});
@@ -14,6 +15,7 @@ export default function ViewNote() {
   }, []);
 
   async function getNote() {
+    setIsLoading(true);
     await fetch(`http://localhost:8081/notes/${id}`, {
       method: "GET",
       headers: {
@@ -71,6 +73,7 @@ export default function ViewNote() {
         </div>
         <div className="img">
           <img alt="img" src={`${src}`}></img>
+          {isLoading && <p>Loading....</p>}
         </div>
       </>
     );
@@ -84,6 +87,7 @@ export default function ViewNote() {
         <div className="img">
           <audio src={`${src}`} controls></audio>
         </div>
+        {isLoading && <p>Loading....</p>}
       </>
     );
   }

@@ -10,10 +10,12 @@ export default function ListNotes() {
   const [findBody, setFindBody] = useState("");
   const [findTitle, setFindTitle] = useState("");
   const [findType, setFindType] = useState("");
+  const [isLoading,setIsLoading] = useState(false);
 
   useEffect(() => {
     let setTimes = [];
     async function getNote() {
+      setIsLoading(true)
       await fetch("http://localhost:8081/notes", {
         method: "GET",
         headers: {
@@ -79,6 +81,7 @@ export default function ListNotes() {
     return data;
   };
   async function deleteNote(id) {
+    setIsLoading(true)
     const response = await fetch(`http://localhost:8081/notes/${id}`, {
       method: "DELETE",
       headers: {
@@ -173,6 +176,7 @@ export default function ListNotes() {
           ))}
         </tbody>
       </table>
+      {isLoading && <p>Loading....</p>}
     </>
   );
 }

@@ -8,6 +8,8 @@ export default function EditNote() {
   const token = localStorage.getItem("jwt");
   const [src, setSrc] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { id } = useParams();
   const [note, setNote] = useState({});
   const [fileId, setFileId] = useState({});
@@ -16,6 +18,7 @@ export default function EditNote() {
   }, []);
 
   async function getNote() {
+    setIsLoading(true);
     await fetch(`http://localhost:8081/notes/${id}`, {
       method: "GET",
       headers: {
@@ -44,8 +47,8 @@ export default function EditNote() {
         return response.json();
       })
       .then((data) => {
-        console.log(data[0].uri.split('/')[4]);
-        setFileId(data[0].uri.split('/')[4])
+        console.log(data[0].uri.split("/")[4]);
+        setFileId(data[0].uri.split("/")[4]);
         getContent(data[0].uri);
         console.log(data[0].uri);
       });
@@ -94,6 +97,7 @@ export default function EditNote() {
     setIsUpdating(true);
   }
   function audioUpload(noteId, blob) {
+    setIsLoading(true);
     fetch(`http://localhost:8081/notes/${noteId}/files/${fileId}`, {
       method: "DELETE",
       body: blob,
@@ -103,7 +107,7 @@ export default function EditNote() {
     });
     const formData = new FormData();
     formData.append("file", blob);
-    console.log("Updating Audio")
+    console.log("Updating Audio");
     fetch(`http://localhost:8081/notes/${noteId}/files`, {
       method: "POST",
       body: formData,
@@ -149,6 +153,7 @@ export default function EditNote() {
         </div>
 
         {isUpdating && <FileUploadForm noteId={id} />}
+        {isLoading && <p>Loading....</p>}
 
         {!isUpdating && (
           <div className="img">
@@ -192,6 +197,7 @@ export default function EditNote() {
             }}
           />
         )}
+        {isLoading && <p>Loading....</p>}
       </>
     );
   }

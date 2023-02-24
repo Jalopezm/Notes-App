@@ -11,6 +11,7 @@ export default function NewNote({ noteType }) {
   let checkbox = document.getElementById("public");
 
   const [isPublic, setIsPublic] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const jwt = setInterval(() => {
@@ -39,6 +40,7 @@ export default function NewNote({ noteType }) {
       isVoiceNote: noteType !== "text",
     };
     console.log("json" + JSON.stringify(data));
+    setIsLoading(true)
     await fetch("http://localhost:8081/notes", {
       method: "POST",
       headers: {
@@ -59,6 +61,7 @@ export default function NewNote({ noteType }) {
   function audioUpload(noteId, blob ) {
     const formData = new FormData();
     formData.append("file", blob);
+    setIsLoading(true)
     fetch(`http://localhost:8081/notes/${noteId}/files`, {
       method: "POST",
       body: formData,
@@ -101,6 +104,7 @@ export default function NewNote({ noteType }) {
           </form>
           {noteId && <FileUploadForm noteId={noteId} />}
         </div>
+        {isLoading&& <p>Loading...</p>}
       </>
     );
   } else {
@@ -130,6 +134,8 @@ export default function NewNote({ noteType }) {
             />
           )}
         </div>
+        {isLoading&& <p>Loading...</p>}
+
       </>
     );
   }
