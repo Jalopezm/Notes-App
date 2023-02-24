@@ -13,7 +13,8 @@ import UserInfo from './routes/UserInfo';
 import ViewNote from './routes/ViewNote';
 import EditNote from './routes/EditNote';
 import UserUpdate from './routes/UpdateUser';
-
+import { register } from './serviceWorkerRegistration';
+register();
 const router = createBrowserRouter([
   {
     path: "/",
