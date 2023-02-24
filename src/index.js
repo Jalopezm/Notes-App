@@ -15,6 +15,7 @@ import EditNote from './routes/EditNote';
 import UserUpdate from './routes/UpdateUser';
 import { register } from './serviceWorkerRegistration';
 register();
+
 const router = createBrowserRouter([
   {
     path: "/",
